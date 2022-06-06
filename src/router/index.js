@@ -36,12 +36,13 @@ import OrderDetail from "../views/Order/Detail";
 
 import Checkout from "../views/Checkout";
 import Payment from "../views/Payment";
+import PaymentDetail from "../views/Payment/PaymentDetail";
 
 function Router() {
    return (
       <BrowserRouter>
          <Routes>
-            <Route path="/" exact element={<App render={<Home />} title="Madu Sehat Berkualitas" />} />
+            <Route path="/" exact element={<App render={<Home />} title="Busana Keluarga Muslim Trendy" />} />
             <Route
                path="/login"
                element={
@@ -138,10 +139,18 @@ function Router() {
                }
             />
             <Route
+               path="/payment"
+               element={
+                  <Middleware.After>
+                     <App render={<Payment />} title="Menunggu Pembayaran" />
+                  </Middleware.After>
+               }
+            />
+            <Route
                path="/payment/:id"
                element={
                   <Middleware.After>
-                     <App render={<Payment />} title="Status Pembayaran" />
+                     <App render={<PaymentDetail />} title="Status Pembayaran" />
                   </Middleware.After>
                }
             />
