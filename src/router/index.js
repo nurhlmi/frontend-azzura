@@ -43,7 +43,7 @@ function Router() {
    return (
       <BrowserRouter>
          <Routes>
-            <Route path="/" exact element={<App render={<Home />} title="Busana Keluarga Muslim Trendy" />} />
+            <Route path="/" exact element={<App render={<Home />} title="Madu Sehat Berkualitas" />} />
             <Route
                path="/login"
                element={
