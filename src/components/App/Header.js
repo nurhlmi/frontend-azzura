@@ -31,6 +31,7 @@ import {
    LockOutlined,
    StorefrontOutlined,
    ShoppingBagOutlined,
+   ArticleOutlined,
 } from "@mui/icons-material";
 
 import axios from "axios";
@@ -242,7 +243,7 @@ export default function Header(props) {
                                  sx={{ ml: 1, flex: 1, fontSize: "13px" }}
                                  value={input}
                                  onChange={handleChange}
-                                 placeholder="Cari madu"
+                                 placeholder="Cari busana"
                                  inputProps={{ "aria-label": "cari" }}
                                  type="search"
                               />
@@ -351,6 +352,12 @@ export default function Header(props) {
                                                 <ShoppingBagOutlined fontSize="small" />
                                              </ListItemIcon>
                                              Kategori
+                                          </MenuItem>
+                                          <MenuItem component={RouterLink} to="/article-tutorial">
+                                             <ListItemIcon sx={{ mr: 0 }}>
+                                                <ArticleOutlined fontSize="small" />
+                                             </ListItemIcon>
+                                             Artikel & Tutorial
                                           </MenuItem>
                                           <Divider />
                                        </Box>
