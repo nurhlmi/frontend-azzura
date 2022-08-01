@@ -27,7 +27,7 @@ import { NumberFormat } from "../components/Format";
 import { Discount } from "../components/Discount";
 import { useRecoilState } from "recoil";
 import { authentication } from "../store/Authentication";
-import { carts } from "../store/Carts";
+import { badgeCarts } from "../store/BadgeCarts";
 
 export default function Cart(props) {
    const token = localStorage.getItem("token");
@@ -51,7 +51,7 @@ export default function Cart(props) {
             },
          })
          .then((res) => {
-            console.log(res.data.data);
+            // console.log(res.data.data);
             setData(res.data.data);
             let productprice = 0;
             let productdiscount = 0;
@@ -122,7 +122,7 @@ export default function Cart(props) {
       // eslint-disable-next-line react-hooks/exhaustive-deps
    }, []);
 
-   const [cart, setCart] = useRecoilState(carts);
+   const [quantities, setQuantities] = useRecoilState(badgeCarts);
    const handleQuantity = async (product_id, quantity, stock, type) => {
       if (quantity >= 1 && quantity <= stock) {
          await axios
@@ -141,9 +141,9 @@ export default function Cart(props) {
                // console.log(res.data.data);
                // setData(data.map((el) => (el.id === product_id ? { ...el, quantity } : el)));
                getData();
-               setCart({
-                  ...cart,
-                  total: type === "decrease" ? cart.total - 1 : cart.total + 1,
+               setQuantities({
+                  ...quantities,
+                  total: type === "decrease" ? quantities.total - 1 : quantities.total + 1,
                });
             })
             .catch((err) => {
@@ -165,9 +165,9 @@ export default function Cart(props) {
             // console.log(res.data.data);
             // setData(data.filter(({ id }) => id !== product_id));
             getData();
-            let total = cart.total - quantity;
-            setCart({
-               ...cart,
+            let total = quantities.total - quantity;
+            setQuantities({
+               ...quantities,
                total: total,
             });
             setSnackbar(true);
@@ -320,25 +320,27 @@ export default function Cart(props) {
                         <CardContent>
                            <Typography fontWeight="bold">Ringkasan Belanja</Typography>
                            <Box sx={{ display: "flex", justifyContent: "space-between", mt: 2 }}>
-                              <Typography>Total Harga ({productQuantity} Barang)</Typography>
-                              <Typography>{NumberFormat(productPrice)}</Typography>
+                              <Typography variant="body2">Total Harga ({productQuantity} Barang)</Typography>
+                              <Typography variant="body2">{NumberFormat(productPrice)}</Typography>
                            </Box>
                            {productDiscount !== 0 && (
                               <Box sx={{ display: "flex", justifyContent: "space-between", mt: 0.5 }}>
-                                 <Typography>Total Diskon Barang</Typography>
-                                 <Typography>-{NumberFormat(productDiscount)}</Typography>
+                                 <Typography variant="body2">Total Diskon Barang</Typography>
+                                 <Typography variant="body2">-{NumberFormat(productDiscount)}</Typography>
                               </Box>
                            )}
                            {groupDiscount !== 0 && (
                               <Box sx={{ display: "flex", justifyContent: "space-between", mt: 0.5 }}>
-                                 <Typography sx={{ textTransform: "capitalize" }}>Total Diskon {auth.user.role}</Typography>
-                                 <Typography>-{NumberFormat(groupDiscount)}</Typography>
+                                 <Typography variant="body2" sx={{ textTransform: "capitalize" }}>
+                                    Total Diskon {auth.user.role}
+                                 </Typography>
+                                 <Typography variant="body2">-{NumberFormat(groupDiscount)}</Typography>
                               </Box>
                            )}
                            {userDiscount !== 0 && (
                               <Box sx={{ display: "flex", justifyContent: "space-between", mt: 0.5 }}>
-                                 <Typography>Total Diskon Pelanggan</Typography>
-                                 <Typography>-{NumberFormat(userDiscount)}</Typography>
+                                 <Typography variant="body2">Total Diskon Pelanggan</Typography>
+                                 <Typography variant="body2">-{NumberFormat(userDiscount)}</Typography>
                               </Box>
                            )}
                            <Divider sx={{ pt: 2 }} />

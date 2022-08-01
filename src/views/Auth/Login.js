@@ -7,7 +7,7 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useRecoilState } from "recoil";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { authentication } from "../../store/Authentication";
-import { carts } from "../../store/Carts";
+import { badgeCarts } from "../../store/BadgeCarts";
 import { Param } from "../../components/Param";
 import { apiUrl } from "../../variable/Url";
 
@@ -16,7 +16,7 @@ export default function Category(props) {
    const navigate = useNavigate("redirect");
    // eslint-disable-next-line no-unused-vars
    const [auth, setAuth] = useRecoilState(authentication);
-   const [cart, setCart] = useRecoilState(carts);
+   const [quantities, setQuantities] = useRecoilState(badgeCarts);
    const [data, setData] = React.useState();
    const [alert, setAlert] = React.useState(false);
    const [error, setError] = React.useState(false);
@@ -54,8 +54,8 @@ export default function Category(props) {
                   });
                   let total = 0;
                   row.data.data.map((value, index) => (total = total + value.quantity));
-                  setCart({
-                     ...cart,
+                  setQuantities({
+                     ...quantities,
                      total: total,
                   });
                   redirect !== false ? navigate(decodeURIComponent(redirect)) : navigate("/");

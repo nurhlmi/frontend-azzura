@@ -39,13 +39,13 @@ import { apiUrl } from "../../variable/Url";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { authentication } from "../../store/Authentication";
-import { carts } from "../../store/Carts";
+import { badgeCarts } from "../../store/BadgeCarts";
 import { search } from "../../store/Search";
 
 export default function Header(props) {
    const navigate = useNavigate();
    const [auth, setAuth] = useRecoilState(authentication);
-   const [cart] = useRecoilState(carts);
+   const [quantities] = useRecoilState(badgeCarts);
    const token = localStorage.getItem("token");
 
    const [setting, setSetting] = React.useState();
@@ -266,7 +266,7 @@ export default function Header(props) {
                                     </Box>
                                     <Tooltip title="Keranjang">
                                        <IconButton component={RouterLink} to="/cart">
-                                          <Badge badgeContent={cart.total} color="error">
+                                          <Badge badgeContent={quantities.total} color="error">
                                              <ShoppingCartOutlined fontSize="small" />
                                           </Badge>
                                        </IconButton>

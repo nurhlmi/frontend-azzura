@@ -2,10 +2,10 @@ import axios from "axios";
 import { atom, selector } from "recoil";
 import { apiUrl } from "../variable/Url";
 
-const carts = atom({
-   key: "carts",
+const badgeCarts = atom({
+   key: "badgeCarts",
    default: selector({
-      key: "default-carts",
+      key: "default-badge-carts",
       get: async () => {
          let total = 0;
          try {
@@ -14,7 +14,7 @@ const carts = atom({
                   Authorization: "Bearer " + localStorage.getItem("token"),
                },
             });
-            data.data.map((value, index) => (total = total + value.quantity));
+            data.data.map((value) => (total = total + value.quantity));
          } catch {
             total = 0;
          }
@@ -25,4 +25,4 @@ const carts = atom({
    }),
 });
 
-export { carts };
+export { badgeCarts };

@@ -28,7 +28,7 @@ import { Link as RouterLink } from "react-router-dom";
 import { useParams, useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { authentication } from "../../store/Authentication";
-import { carts } from "../../store/Carts";
+import { badgeCarts } from "../../store/BadgeCarts";
 import { apiUrl, title } from "../../variable/Url";
 import { NumberFormat } from "../../components/Format";
 import { YoutubeParser } from "../../components/YoutubeParser";
@@ -39,7 +39,7 @@ export default function ProductDetail(props) {
    const navigate = useNavigate();
    const token = localStorage.getItem("token");
    const [auth] = useRecoilState(authentication);
-   const [cart, setCart] = useRecoilState(carts);
+   const [quantities, setQuantities] = useRecoilState(badgeCarts);
 
    const [data, setData] = useState();
    const [product, setProduct] = useState();
@@ -177,9 +177,9 @@ export default function ProductDetail(props) {
          })
          .then((res) => {
             // console.log(res.data.data);
-            let total = cart.total + quantity;
-            setCart({
-               ...cart,
+            let total = quantities.total + quantity;
+            setQuantities({
+               ...quantities,
                total: total,
             });
             if (preorder === true) {
